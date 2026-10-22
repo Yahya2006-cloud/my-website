@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire d'Analyse de Données : Univariée & Bivariée</title>
+    <!-- MathJax : configuration AVANT le chargement du script -->
+    <script>
+        window.MathJax = {
+            tex: {
+                // Active les formules en ligne entre $...$ (désactivé par défaut dans MathJax 3)
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                // Formules centrées entre $$...$$
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <!-- MathJax pour l'affichage des formules mathématiques -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #3b82f6;
+            --secondary: #0f766e;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #334155;
+            --border: #e2e8f0;
+            --pop-color: #1e40af;
+            --sample-color: #b45309;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--bg);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+        }
+
+        header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+
+        .section-title {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary-light);
+            padding-bottom: 8px;
+            margin-top: 40px;
+            font-size: 1.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--secondary);
+        }
+
+        /* Comparaison Population vs Échantillon */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .box-population {
+            background-color: #eff6ff;
+            border-left: 5px solid var(--pop-color);
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .box-sample {
+            background-color: #fffbeb;
+            border-left: 5px solid var(--sample-color);
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .box-population h4 {
+            color: var(--pop-color);
+            margin-top: 0;
+        }
+
+        .box-sample h4 {
+            color: var(--sample-color);
+            margin-top: 0;
+        }
+
+        .formula {
+            background: #f1f5f9;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 1.1rem;
+            margin: 10px 0;
+        }
+
+        .explanation {
+            font-size: 0.95rem;
+            color: #475569;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .badge-pop { background-color: var(--pop-color); }
+        .badge-sample { background-color: var(--sample-color); }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid var(--border);
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f1f5f9;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>Formulaire d'Analyse de Données Statistiques</h1>
+        <p>Analyse Univariée & Bivariée — Formules Exhaustives et Explications</p>
+    </header>
+
+    <!-- SECTION 1 : UNIVARIÉE -->
+    <h2 class="section-title">1. Statistique Univariée (Une seule variable)</h2>
+
+    <!-- Moyenne -->
+    <div class="card">
+        <h3>1.1 Moyenne Empirique ($\bar{X}$)</h3>
+        <div class="formula">
+            $$\bar{X} = \frac{1}{N} \sum_{i=1}^{N} X_i$$
+        </div>
+        <div class="explanation">
+            <strong>Explication :</strong> Somme de toutes les valeurs observées divisée par le nombre d'observations $N$. Elle représente le centre de gravité des données.
+        </div>
+    </div>
+
+    <!-- Étendue & Médiane -->
+    <div class="card">
+        <h3>1.2 Médiane ($Me$) et Étendue ($E$)</h3>
+        <p><strong>Étendue :</strong> Différence entre la valeur maximale et minimale observée.</p>
+        <div class="formula">
+            $$E = X_{\max} - X_{\min}$$
+        </div>
+        <p><strong>Médiane :</strong> Valeur qui sépare la série ordonnée en deux parties égales (50% en dessous, 50% au-dessus).</p>
+        <div class="formula">
+            $$\text{Si } N \text{ est pair : } Me = \frac{X_{(N/2)} + X_{(N/2 + 1)}}{2} \quad \Big| \quad \text{Si } N \text{ est impair : } Me = X_{\left(\frac{N+1}{2}\right)}$$
+        </div>
+    </div>
+
+    <!-- Variance & Écart-Type -->
+    <div class="card">
+        <h3>1.3 Variance ($\sigma^2$ ou $S^2$) et Écart-Type ($\sigma$ ou $S$)</h3>
+        <div class="explanation">
+            <strong>Explication :</strong> La variance mesure la dispersion des données autour de la moyenne. L'écart-type en est la racine carrée et s'exprime dans la même unité que les données d'origine.
+        </div>
+
+        <div class="comparison-grid">
+            <!-- Cas Population -->
+            <div class="box-population">
+                <h4><span class="badge badge-pop">Population Globale</span> On dispose de N individus</h4>
+                <p>On divise par <strong>$N$</strong> :</p>
+                <div class="formula">
+                    $$\sigma_X^2 = \frac{1}{N} \sum_{i=1}^{N} (X_i - \bar{X})^2$$
+                </div>
+                <p><strong>Écart-type :</strong></p>
+                <div class="formula">
+                    $$\sigma_X = \sqrt{\sigma_X^2}$$
+                </div>
+            </div>
+
+            <!-- Cas Échantillon -->
+            <div class="box-sample">
+                <h4><span class="badge badge-sample">Échantillon</span> Extrait d'une population</h4>
+                <p>On divise par <strong>$N - 1$</strong> (correcteur de Biais) :</p>
+                <div class="formula">
+                    $$S_X^2 = \frac{1}{N - 1} \sum_{i=1}^{N} (X_i - \bar{X})^2$$
+                </div>
+                <p><strong>Écart-type échantillon :</strong></p>
+                <div class="formula">
+                    $$S_X = \sqrt{S_X^2}$$
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- SECTION 2 : BIVARIÉE -->
+    <h2 class="section-title">2. Statistique Bivariée (Deux variables X et Y)</h2>
+
+    <!-- Covariance -->
+    <div class="card">
+        <h3>2.1 Covariance ($\sigma_{XY}$ ou $S_{XY}$)</h3>
+        <div class="explanation">
+            <strong>Explication :</strong> Mesure le sens de variation conjointe entre deux variables. Une covariance positive indique que les deux variables ont tendance à varier dans le même sens.
+        </div>
+
+        <div class="comparison-grid">
+            <!-- Cas Population -->
+            <div class="box-population">
+                <h4><span class="badge badge-pop">Population Globale</span> Divisé par N - 1</h4>
+                <div class="formula">
+                    $$\sigma_{XY} = \frac{1}{N - 1} \sum_{i=1}^{N} (X_i - \bar{X})(Y_i - \bar{Y})$$
+                </div>
+            </div>
+
+            <!-- Cas Échantillon -->
+            <div class="box-sample">
+                <h4><span class="badge badge-sample">Échantillon</span> Divisé par N</h4>
+                <div class="formula">
+                    $$S_{XY} = \frac{1}{N} \sum_{i=1}^{N} (X_i - \bar{X})(Y_i - \bar{Y})$$
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Corrélation -->
+    <div class="card">
+        <h3>2.2 Coefficient de Corrélation de Pearson ($r_{XY}$)</h3>
+        <div class="formula">
+            $$r_{XY} = \frac{\sigma_{XY}}{\sigma_X \cdot \sigma_Y} \quad \text{ou} \quad r_{XY} = \frac{S_{XY}}{S_X \cdot S_Y}$$
+        </div>
+        <div class="explanation">
+            <strong>Explication :</strong> Normalise la covariance pour obtenir une mesure sans unité comprise entre $-1$ et $1$.
+            <ul>
+                <li>$r = 1$ : Corrélation linéaire positive parfaite.</li>
+                <li>$r = -1$ : Corrélation linéaire négative parfaite.</li>
+                <li>$r = 0$ : Absence de relation linéaire.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Normalisation Min-Max -->
+    <div class="card">
+        <h3>2.3 Normalisation Min-Max</h3>
+        <div class="formula">
+            $$X_{\text{norm}} = \frac{X - X_{\min}}{X_{\max} - X_{\min}}$$
+        </div>
+        <div class="explanation">
+            <strong>Explication :</strong> Transforme les valeurs d'une variable quantitative pour les ramener dans l'intervalle $[0, 1]$.
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
